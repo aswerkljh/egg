@@ -1,6 +1,6 @@
 # Extremely Generic (PHP) Gallery
 
-This PHP gallery will populate subfolders with a symlinked index.php, hence the 'Many Files'.
+This PHP gallery is a drop-in solution to an existing directory-based structure, as opposed to a meta-data one.
 
 It is appropriate to use it as a single-folder gallery, too.
 
