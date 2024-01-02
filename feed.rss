@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss version="2.0">
+  <channel>
+    <title>eggsample title</title>
+    <link>http://p.drkt.eu</link>
+    <description>This feed is for new uploads to egg. Yes, you edit it manually like our forefathers before us.</description>
+
+    <item>
+      <title>Eggsample item 1</title>
+      <link>https://p.drkt.eu/2023/more_dramatic_clouds.mp4</link>
+      <description>Eggsample description 1</description>
+    </item>
+
+    <item>
+      <title>Eggsample item 2</title>
+      <link>https://p.drkt.eu/2023/daybreak.mp4</link>
+      <description>Eggsample description 2</description>
+    </item>
+
+  </channel>
+</rss>
