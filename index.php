@@ -80,8 +80,8 @@
 				// Check if ".rootdir" file exists
 				$is_root_dir = file_exists($dir . '/.rootdir');
 				if ($is_root_dir) {
-					// If is root dir, print RSS and Copyright instead of Return
-					echo '<a href="copyright.html"><p class="folder">Copyright</p></a>';
+					// If is root dir, print RSS and about instead of Return
+					echo '<a href="about.html"><p class="folder">About</p></a>';
 					echo '<a href="viewcounts.php"><p class="folder">Viewcounts</p></a>';
 					echo '<a href="feed.rss"><p class="folder">RSS feed</p></a>';
 				}
