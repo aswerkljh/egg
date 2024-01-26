@@ -36,6 +36,18 @@ function getViewCounts() {
     return $counts;
 }
 
+// Function to calculate the total counts from the result of getViewCounts
+function getTotalCounts() {
+    $counts = getViewCounts();
+    $countsTotal = 0;
+
+    foreach ($counts as $count) {
+        $countsTotal += $count['count'];
+    }
+
+    return $countsTotal;
+}
+
 // Get initial view counts
 $initialCounts = getViewCounts();
 ?>
@@ -120,14 +132,18 @@ $initialCounts = getViewCounts();
     <div id="folder-wrapper">
         <div class="folder"><a href=".."><p style="margin-left:5px;" class="folder">< Return</p></a></div>
         <div class="folder"><a href="./viewcounts.php"><p style="margin-left:5px;" class="folder">Refresh</p></a></div>
-        <p id="trackingasof">Tracking file requests as of:<br>&nbsp;&nbsp;December 6th, 2023</p>
+        <?php
+            // Get 
+            $countsTotal = getTotalCounts();
+            echo '<p id="trackingasof">Tracking ' . $countsTotal . ' requests as of:<br>&nbsp;&nbsp;December 6th, 2023</p>';
+        ?>
     </div>
     <div id="viewCountsContainer">
     <?php foreach ($initialCounts as $count): ?>
         <div class="thumbnail-container">
             <?php
-            // Create the modified URL with '/.thumb/' correctly appended
-            $modifiedUrl = dirname($count['image_url']) . '/.thumb/' . basename($count['image_url']);
+                // Create the modified URL with '/.thumb/' correctly appended
+                $modifiedUrl = dirname($count['image_url']) . '/.thumb/' . basename($count['image_url']);
             ?>
             <a href="<?= htmlspecialchars($count['image_url']) ?>">
                 <?php if (pathinfo($count['image_url'], PATHINFO_EXTENSION) === 'mp4'): ?>
