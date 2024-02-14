@@ -19,37 +19,37 @@ class Database {
 }
 
 // Function to read and parse view counts from the SQLite database
-function getViewCounts() {
+function getViewCounts($limit = 50) {
     $counts = [];
 
     try {
         $pdo = Database::getInstance();
-        $query = 'SELECT image_url, count FROM view_counts ORDER BY count DESC';
+        $query = 'SELECT image_url, count FROM view_counts ORDER BY count DESC LIMIT :limit';
         $statement = $pdo->prepare($query);
+        $statement->bindValue(':limit', $limit, PDO::PARAM_INT);
         $statement->execute();
         $counts = $statement->fetchAll(PDO::FETCH_ASSOC);
     } catch (PDOException $e) {
         // Log error instead of displaying it
         error_log('Database Error: ' . $e->getMessage());
     }
-
     return $counts;
 }
 
-// Function to calculate the total counts from the result of getViewCounts
+// Function to calculate the total counts from all entries in the database
 function getTotalCounts() {
-    $counts = getViewCounts();
-    $countsTotal = 0;
-
-    foreach ($counts as $count) {
-        $countsTotal += $count['count'];
-    }
-
-    return $countsTotal;
+    $pdo = Database::getInstance();
+    $query = 'SELECT SUM(count) AS total FROM view_counts';
+    $statement = $pdo->query($query);
+    $result = $statement->fetch(PDO::FETCH_ASSOC);
+    $countsTotal = $result['total'];
+    $formattedCountsTotal = number_format($countsTotal, 0, '', ' ');
+    return $formattedCountsTotal;
 }
 
 // Get initial view counts
 $initialCounts = getViewCounts();
+$countsTotal = getTotalCounts();
 ?>
 
 <!DOCTYPE html>
@@ -132,11 +132,7 @@ $initialCounts = getViewCounts();
     <div id="folder-wrapper">
         <div class="folder"><a href=".."><p style="margin-left:5px;" class="folder">< Return</p></a></div>
         <div class="folder"><a href="./viewcounts.php"><p style="margin-left:5px;" class="folder">Refresh</p></a></div>
-        <?php
-            // Get 
-            $countsTotal = getTotalCounts();
-            echo '<p id="trackingasof">Tracking ' . $countsTotal . ' requests as of:<br>&nbsp;&nbsp;December 6th, 2023</p>';
-        ?>
+        <?php echo '<p id="trackingasof">Tracking ' . $countsTotal . ' requests as of:<br>&nbsp;&nbsp;December 6th, 2023</p>'; ?>
     </div>
     <div id="viewCountsContainer">
     <?php foreach ($initialCounts as $count): ?>
