@@ -4,6 +4,8 @@ This PHP gallery is a drop-in solution to an existing directory-based structure,
 
 It is appropriate to use it as a single-folder gallery, too.
 
+Pull requests and issues are accepted!
+
 DEMO [https://p.drkt.eu](https://p.drkt.eu)
 
 ## Features
