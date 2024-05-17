@@ -38,10 +38,10 @@
 		}
 	}
 
-	// Function to generate MP4 thumbnail for video using ffmpeg
+	// Generate MP4 thumbnail for video using ffmpeg
 	function generateVideoMp4Thumbnail($videoPath, $thumbnailPath, $maxHeight = 200)
 	{
-		$ffmpegPath = 'ffmpeg'; // Change this to the path of ffmpeg if it's not in the system's PATH
+		$ffmpegPath = 'ffmpeg'; // ffmpeg binary must be in system PATH
 		//$cmd = "$ffmpegPath -i \"$videoPath\" -vf \"scale=-1:$maxHeight,setsar=1/1\" -c:v libx264 -pix_fmt  yuv420p -movflags +faststart \"$thumbnailPath\"";
 		$cmd = "$ffmpegPath -i \"$videoPath\" -vf \"scale=-1:$maxHeight,setsar=1/1\" -c:v libx264 -crf 30 -preset veryslow -pix_fmt yuv420p -movflags faststart \"$thumbnailPath\"";
 
@@ -70,7 +70,7 @@
 			#separator {margin:4px;background-color:hsl(0, 0%, 11%);float:left;padding: 4px 0px 4px 0px;}
 			#image-wrapper {margin:auto;}
 			.wrapper-array-items {margin-top:25px;float:left;}
-			.thumb-item {margin: 5px 4px 0px 4px;height:200px;}
+			.thumb-item {margin: 4.5px 4px 0px 4px;height:200px;}
 
 		</style>
 	</head>
@@ -89,6 +89,7 @@
 					// Print return button
 					echo '<a href=".."><p style="margin-left:5px;" class="folder">< Return</p></a>';
 				}
+
 				// Check if there are any folders
 				$has_folders = false;
 				foreach($folders as $folder) {
@@ -97,6 +98,7 @@
 						break;
 					}
 				}
+
 				// Decide if to output subfolder separator or not
 				if($has_folders) {
 					echo '<p style="margin-left:5px;" id="separator">|</p>';
@@ -113,62 +115,63 @@
 		<div id="image-wrapper">
 			<div class="wrapper-array-items">
 				<?php
-					// If root dir, print manually curated images. $is_root_dir Variable created on line 80
+					// If root dir, print manually curated images (NOT VIDEOS).
 					if ($is_root_dir) { 
-						//   ORIGINAL IMAGE V             V THUMBNAIL IMAGE
-						// print "<a href=\"\"><img src=\"\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2023/IMG_2954.jpg\"><img src=\"https://p.drkt.eu/2023/.thumb/IMG_2954.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2023/_MG_4305.jpg\"><img src=\"https://p.drkt.eu/2023/.thumb/_MG_4305.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2023/_MG_3560.jpg\"><img src=\"https://p.drkt.eu/2023/.thumb/_MG_3560.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2023/_MG_4464.jpg\"><img src=\"https://p.drkt.eu/2023/.thumb/_MG_4464.jpg\" class=\"thumb-item\"></a>";
+						$fpImages = array(
+							"https://p.drkt.eu/2024/auroras.jpg",
+							"https://p.drkt.eu/2024/ghosts.jpg",
+							"https://p.drkt.eu/2024/_MG_5180.jpg",
+							"https://p.drkt.eu/2023/_MG_4779.jpg",
+							"https://p.drkt.eu/2023/_MG_4359.jpg",
+							"https://p.drkt.eu/2023/_MG_4305.jpg",
+							"https://p.drkt.eu/2023/_MG_4464.jpg",
+							"https://p.drkt.eu/2023/IMG_2954.jpg",
+							"https://p.drkt.eu/2023/Horsens-from-Borre-Knob.jpg",
+							"https://p.drkt.eu/2022/IMG_1991.jpg",
+							"https://p.drkt.eu/2022/IMG_9880.jpg",
+							"https://p.drkt.eu/2022/Ree_Park_19_July/IMG_1167.jpg",
+							"https://p.drkt.eu/2022/Givskud_Zoo_April_26/IMG_9407.jpg",
+							"https://p.drkt.eu/2022/Givskud_Zoo_April_26/IMG_9162.jpg",
+							"https://p.drkt.eu/2022/Givskud_Zoo_April_26/IMG_9640.jpg",
+							"https://p.drkt.eu/2022/Givskud_Zoo_April_26/IMG_9624.jpg",
+							"https://p.drkt.eu/2021/IMG_4170.jpg",
+							"https://p.drkt.eu/2021/Silkeborg_September_4/IMG_5822.jpg",
+							"https://p.drkt.eu/2021/Randers_Regnskov_November_4/IMG_7388.jpg",
+							"https://p.drkt.eu/2021/Randers_Regnskov_November_4/IMG_7187.jpg",
+							"https://p.drkt.eu/2021/Randers_Regnskov_November_4/IMG_7359.jpg",
+							"https://p.drkt.eu/2021/Hirtshals_June_19/IMG_4396.jpg",
+							"https://p.drkt.eu/2021/Givskud_September_3/IMG_5041.jpg",
+							"https://p.drkt.eu/2020/IMG_2479.jpg",
+							"https://p.drkt.eu/2020/IMG_2813.jpg",
+							"https://p.drkt.eu/2020/IMG_2317.jpg",
+							"https://p.drkt.eu/2020/Sukkertoppen_May_3/IMG_2038.jpg",
+							"https://p.drkt.eu/2019/June_21/IMG_1387.jpg",
+							"https://p.drkt.eu/2018/rovfugle_silkeborg/IMG_0127.jpg",
+							"https://p.drkt.eu/2017/IMG_2598.jpg",
+							"https://p.drkt.eu/2016/14372293_2108291979396890_7326883603774323269_o.jpg",
+							"https://p.drkt.eu/2016/14188640_2101374800088608_5453883739002624296_o.jpg",
+							"https://p.drkt.eu/2024/Abandoned_Building/_MG_5056.jpg",
+							"https://p.drkt.eu/2024/Abandoned_Building/_MG_5067.jpg",
+							"https://p.drkt.eu/2024/Abandoned_Building/_MG_5053.jpg",
+							"https://p.drkt.eu/2021/IMG_3430.jpg",
+							"https://p.drkt.eu/2021/Hirtshals_June_19/IMG_4242.jpg",
+							"https://p.drkt.eu/2021/Hirtshals_June_19/IMG_3772.jpg"
+						);
 
-						print "<a href=\"https://p.drkt.eu/2023/_MG_4665.jpg\"><img src=\"https://p.drkt.eu/2023/.thumb/_MG_4665.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2023/_MG_4763.jpg\"><img src=\"https://p.drkt.eu/2023/.thumb/_MG_4763.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2023/_MG_4782.jpg\"><img src=\"https://p.drkt.eu/2023/.thumb/_MG_4782.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2023/Little_Bird/bird.jpg\"><img src=\"https://p.drkt.eu/2023/Little_Bird/.thumb/bird.jpg\" class=\"thumb-item\"></a>";
+						// Shuffle the image order for each refresh
+						shuffle($fpImages);
 
-						print "<a href=\"https://p.drkt.eu/2023/Trippy_Leaf/_MG_4110.jpg\"><img src=\"https://p.drkt.eu/2023/Trippy_Leaf/.thumb/_MG_4110.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2022/IMG_9880.jpg\"><img src=\"https://p.drkt.eu/2022/.thumb/IMG_9880.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2022/IMG_1991.jpg\"><img src=\"https://p.drkt.eu/2022/.thumb/IMG_1991.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2022/Ree_Park_19_July/IMG_1167.jpg\"><img src=\"https://p.drkt.eu/2022/Ree_Park_19_July/.thumb/IMG_1167.jpg\" class=\"thumb-item\"></a>";
-
-						print "<a href=\"https://p.drkt.eu/2022/Ree_Park_19_July/IMG_1117.jpg\"><img src=\"https://p.drkt.eu/2022/Ree_Park_19_July/.thumb/IMG_1117.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2022/Odense_Zoo_March_21/IMG_7775.jpg\"><img src=\"https://p.drkt.eu/2022/Odense_Zoo_March_21/.thumb/IMG_7775.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2022/Givskud_Zoo_July_10/IMG_0472.jpg\"><img src=\"https://p.drkt.eu/2022/Givskud_Zoo_July_10/.thumb/IMG_0472.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2022/Givskud_Zoo_April_26/IMG_9640.jpg\"><img src=\"https://p.drkt.eu/2022/Givskud_Zoo_April_26/.thumb/IMG_9640.jpg\" class=\"thumb-item\"></a>";
-
-						print "<a href=\"https://p.drkt.eu/2022/Givskud_Zoo_April_26/IMG_9407.jpg\"><img src=\"https://p.drkt.eu/2022/Givskud_Zoo_April_26/.thumb/IMG_9407.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2022/Givskud_Zoo_April_26/IMG_9209.jpg\"><img src=\"https://p.drkt.eu/2022/Givskud_Zoo_April_26/.thumb/IMG_9209.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2022/Givskud_Zoo_April_26/IMG_8943.jpg\"><img src=\"https://p.drkt.eu/2022/Givskud_Zoo_April_26/.thumb/IMG_8943.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/IMG_4170.jpg\"><img src=\"https://p.drkt.eu/2021/.thumb/IMG_4170.jpg\" class=\"thumb-item\"></a>";
-
-						print "<a href=\"https://p.drkt.eu/2021/IMG_3732.jpg\"><img src=\"https://p.drkt.eu/2021/.thumb/IMG_3732.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/IMG_3430.jpg\"><img src=\"https://p.drkt.eu/2021/.thumb/IMG_3430.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/IMG_3468.jpg\"><img src=\"https://p.drkt.eu/2021/.thumb/IMG_3468.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/Silkeborg_September_4/IMG_5822.jpg\"><img src=\"https://p.drkt.eu/2021/Silkeborg_September_4/.thumb/IMG_5822.jpg\" class=\"thumb-item\"></a>";
-
-						print "<a href=\"https://p.drkt.eu/2021/Randers_Regnskov_November_4/IMG_7359.jpg\"><img src=\"https://p.drkt.eu/2021/Randers_Regnskov_November_4/.thumb/IMG_7359.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/Randers_Regnskov_November_4/IMG_7388.jpg\"><img src=\"https://p.drkt.eu/2021/Randers_Regnskov_November_4/.thumb/IMG_7388.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/Randers_Regnskov_November_4/IMG_7187.jpg\"><img src=\"https://p.drkt.eu/2021/Randers_Regnskov_November_4/.thumb/IMG_7187.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/Hirtshals_June_19/IMG_3772.jpg\"><img src=\"https://p.drkt.eu/2021/Hirtshals_June_19/.thumb/IMG_3772.jpg\" class=\"thumb-item\"></a>";
-
-						print "<a href=\"https://p.drkt.eu/2021/Hirtshals_June_19/IMG_4396.jpg\"><img src=\"https://p.drkt.eu/2021/Hirtshals_June_19/.thumb/IMG_4396.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/Givskud_September_3/IMG_5050.jpg\"><img src=\"https://p.drkt.eu/2021/Givskud_September_3/.thumb/IMG_5050.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/Givskud_September_3/IMG_5041.jpg\"><img src=\"https://p.drkt.eu/2021/Givskud_September_3/.thumb/IMG_5041.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2021/Fyn_August_6/IMG_4812.jpg\"><img src=\"https://p.drkt.eu/2021/Fyn_August_6/.thumb/IMG_4812.jpg\" class=\"thumb-item\"></a>";
-
-						print "<a href=\"https://p.drkt.eu/2020/IMG_2479.jpg\"><img src=\"https://p.drkt.eu/2020/.thumb/IMG_2479.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2020/IMG_2822.jpg\"><img src=\"https://p.drkt.eu/2020/.thumb/IMG_2822.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2020/IMG_3048.jpg\"><img src=\"https://p.drkt.eu/2020/.thumb/IMG_3048.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2020/Sukkertoppen_May_3/A_IMG_2080.jpg\"><img src=\"https://p.drkt.eu/2020/Sukkertoppen_May_3/.thumb/A_IMG_2080.jpg\" class=\"thumb-item\"></a>";
-
-						print "<a href=\"https://p.drkt.eu/2019/June_21/IMG_1474.jpg\"><img src=\"https://p.drkt.eu/2019/June_21/.thumb/IMG_1474.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2019/June_21/IMG_1387.jpg\"><img src=\"https://p.drkt.eu/2019/June_21/.thumb/IMG_1387.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2018/IMG_0162.jpg\"><img src=\"https://p.drkt.eu/2018/.thumb/IMG_0162.jpg\" class=\"thumb-item\"></a>";
-						print "<a href=\"https://p.drkt.eu/2018/rovfugle_silkeborg/IMG_0071.jpg\"><img src=\"https://p.drkt.eu/2018/rovfugle_silkeborg/.thumb/IMG_0071.jpg\" class=\"thumb-item\"></a>";
-
-						print "<a href=\"https://p.drkt.eu/2018/rovfugle_silkeborg/IMG_0143.jpg\"><img src=\"https://p.drkt.eu/2018/rovfugle_silkeborg/.thumb/IMG_0143.jpg\" class=\"thumb-item\"></a>";
+						// Output HTML for each image in array, with thumbnails for img src
+						foreach ($fpImages as $image) {
+							$pathParts = pathinfo($image);
+							$directory = $pathParts['dirname'];
+							$filename = $pathParts['basename'];
+							$thumbnailUrl = $directory . "/.thumb/" . $filename;
+						
+							echo "<a href='$image'><img src='$thumbnailUrl' class=\"thumb-item\"></a>";
+						}
 					}
+
 					// If not root dir, loop through and print thumbnails
 					else {
 						// Output HTML for each thumbnail, videos first images last
@@ -177,6 +180,7 @@
 							$videoPath = './' . $video;
 							echo '<a href="' . $videoPath . '"><video src="' . $thumbPath . '" class="thumb-item"autoplay loop muted playsinline style="outline: none;"></video></a>';
 						}
+
 						foreach($images as $link){
 							$thumbPath = './.thumb/' . $link;
 							$imgPath = './' . $link;
@@ -185,7 +189,7 @@
 							} else {
 								$srcPath = $imgPath;
 							}
-							print "<a href=\"$imgPath\"><img src=\"$srcPath\" class=\"thumb-item\"></a>";
+							echo "<a href=\"$imgPath\"><img src=\"$srcPath\" class=\"thumb-item\"></a>";
 						}
 					}
 				?>
