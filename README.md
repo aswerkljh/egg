@@ -1,3 +1,7 @@
+# ARCHIVED
+Development continues at [https://p.drkt.eu/about](https://p.drkt.eu/about)
+
+
 # Extremely Generic (PHP) Gallery
 
 This PHP gallery is a drop-in solution to an existing directory-based structure, as opposed to a meta-data one.
